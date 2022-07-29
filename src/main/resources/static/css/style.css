@@ -1,0 +1,139 @@
+body {
+	background: #e2e2e2 !important;
+}
+
+.bg-primary {
+	background: #009688 !important;
+}
+
+.banner {
+	width: 100%;
+	height: 93vh;
+	background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
+		url("../img/banner.jpg");
+	background-size: cover;
+	color: white;
+}
+
+/* profile phonto css on sigle contact */
+
+.profile_picture{
+	height: 40px;
+	width: 40px;
+	object-fit:cover;
+	border-radius: 50%;
+}
+
+
+/* ---------------side bar ----------- */
+@media only screen and (max-width: 600px) {
+	.sidebar {
+		display: none;
+		width: 80% !important;
+		background: white;
+		height: 100vh;
+		position: fixed;
+		padding-top: 20px;
+	}
+	.content {
+		margin-left: 0% !important;
+	}
+}
+/* ------------------for above 600px screen------------ */
+.sidebar {
+	width: 18%;
+	background:white;
+	height: 100%;
+	position: fixed;
+	padding-top: 45px;
+	z-index: 9999999;
+}
+
+.sidebar a {
+	display: block;
+	width: 100%;
+	padding: 20px 30px;
+	text-decoration: none;
+	color: gray;
+	font-size: 18px;
+}
+
+.sidebar a:hover {
+	background:buttonshadow;
+	font-size: 20px;
+	font-weight:bold;
+	color: white;
+	
+}
+
+.sidebar .divider {
+	height: 2.5px;
+	width: 100%;
+	background: #e2e2e2;
+	margin-top: 10px;
+}
+
+
+
+.content {
+	margin-left: 20%;
+}
+
+/* -------Cross btn and side bar open btn  ---- */
+.sidebar .crossBtn {
+	position: absolute;
+	font-size: 30px;
+	color: blue;
+	top: 25px;
+	right: 35px;
+	cursor: pointer;
+	transition:0.4s;
+}
+
+.sidebar .crossBtn:hover{
+	font-size:40px;
+	color: green;
+	transition:0.4s;
+}
+
+/* The button used to open the sidebar */
+.content .openbtn {
+	font-size: 20px;
+	cursor: pointer;
+	color: blue;
+	padding: 10px 15px;
+	border: none;
+	transition:0.4s;
+}
+
+.content .openbtn:hover {
+	
+	font-size:25px;
+	color: green;
+	transition:0.4s;
+}
+
+/* ending of open and close btn of sidebar */
+
+
+/* search result in view contact */
+
+.search-container{
+ position: relative;	
+	
+}
+
+.search-result{
+	position: absolute;
+	width: 100%;
+	border: 1px solid gray ;
+	padding: 10px;
+	background: white;
+    display: none;
+}
+/* sidebar link activation*/
+
+.active{
+	background: #009688 !important;
+	color: white !important;
+}

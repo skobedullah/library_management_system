@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+</head>
+<body>
+
+	<section>
+
+		<div class="container">
+			<br>
+
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<div class="card">
+						<header class="card-header bg-primary">
+							<a th:href="@{/admin_login}"
+								class="float-right btn btn-outline-primary mt-1 bg-primary text-white">
+								Admin LogIn </a>
+							<h4 class="card-title mt-2 text-white">Librarian Login</h4>
+						</header>
+						<br>
+					<div class="container text-center">	
+						<div th:if="${param.error}" class="alert alert-danger">
+						     Invalid Username Or Password
+						</div>
+						<div th:if="${param.logout}" class="alert alert-success">
+						     Successfully logged out
+						</div>
+					</div>
+						<article class="card-body">
+						<div class="container text-center">
+						    <img style="width: 150px" alt="" th:src="@{/img/login.png}">	
+						</div>
+						
+						
+							<form id="login-form" class="form" th:action="@{/librarian/home}" method="post">
+								<div class="form-row">
+									<div class="col form-group">
+										<label>User Id</label> 
+										<input 
+											   type="text" 
+											   name="username"
+											   class="form-control"
+											   placeholder="Enter Your Username/Email">
+									</div>
+								</div>
+								<!-- form-row.// -->
+								<div class="form-group">
+									<label>Password</label> 
+									<input 
+									      type="password"
+									      name="password"
+										  class="form-control" 
+										  placeholder="Enter your password">
+								</div>
+								<!-- form-group end.// -->
+								<div class="form-group">
+									<button 
+									       type="submit" 
+									       th:href="@{/librarian/home}"
+									       class="btn btn-success btn-block">
+										Login As Librarian</button>
+								</div>
+							</form>
+						</article>
+						<!-- card-body end .// -->
+						
+						<div class="container text-center mb-3">
+						   <a th:href="@{/forgot-password}">forgot password</a>
+						</div>
+						
+					</div>
+					<!-- card.// -->
+				</div>
+				<!-- col.//-->
+
+			</div>
+			<!-- row.//-->
+
+
+		</div>
+		<!--container end.//-->
+
+		<br> <br>
+
+
+
+	</section>
+
+</body>
+</html>
