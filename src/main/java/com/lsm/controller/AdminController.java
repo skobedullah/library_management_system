@@ -8,7 +8,7 @@ import com.lsm.model.User;
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
-	
+	//test
 	@RequestMapping("/home")
 	public String adminHome() {
 		return "/admin/home";
