@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class LibraryManagementSystemApplication {
-//test changes
-	//wvwq
-	//ddf
+
 	public static void main(String[] args) {
+		System.out.println("app is running");
 		SpringApplication.run(LibraryManagementSystemApplication.class, args);
 	}
 
