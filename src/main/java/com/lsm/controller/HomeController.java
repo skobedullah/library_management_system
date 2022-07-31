@@ -18,16 +18,12 @@ public class HomeController {
 		return "home/about";
 	}
 	
-	@RequestMapping("/librarian_login")
+	@RequestMapping("/login")
 	public String sighnin() {
 		
-		return "home/LibrarianLogin";
+		return "home/login";
 	}
 	
-	@RequestMapping("/admin_login")
-	public String signup() {
-		
-		return "home/adminLogin";
-	}
+	
 
 }

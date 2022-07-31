@@ -16,15 +16,8 @@ public class UserController {
 	
 	@RequestMapping("/home")
 	public String home() {
-		/*
-		 * System.out.println("invokation start of adding a user"); User u1=new
-		 * User(102,"sk obedullah",
-		 * "obedullah001@gmail.com","obed@111",true,"admin",""); User addUser =
-		 * repository.addUser(u1);
-		 * if(addUser==null)System.out.println("user not added to db");
-		 * System.out.println("user added sucessfully");
-		 */
-		
 		return "/librarian/home";
 	}
+	
+	
 }

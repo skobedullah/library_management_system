@@ -9,6 +9,7 @@ public class User {
 
 	private String name;
 
+	//obedullah@gmail.com
 	private String email;
 
 	private String password;

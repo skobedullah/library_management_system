@@ -8,6 +8,7 @@ public class LibraryManagementSystemApplication {
 
 	public static void main(String[] args) {
 		System.out.println("app is running");
+		System.out.println("app is running");
 		SpringApplication.run(LibraryManagementSystemApplication.class, args);
 	}
 

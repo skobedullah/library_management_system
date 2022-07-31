@@ -16,10 +16,8 @@
 				<div class="col-md-10">
 					<div class="card">
 						<header class="card-header bg-primary">
-							<a th:href="@{/librarian_login}"
-								class="float-right btn btn-outline-primary mt-1 bg-primary text-white">
-								Librarian LogIn </a>
-							<h4 class="card-title mt-2 text-white">Admin Login</h4>
+							
+							<h4 class="card-title mt-2 text-white">Login</h4>
 						</header>
 						<br>
 					<div class="container text-center">	
@@ -32,9 +30,11 @@
 					</div>
 						<article class="card-body">
 						<div class="container text-center">
-						    <img style="width: 150px" alt="" th:src="@{/img/login.png}">	
+						    <img style="width: 150px" alt="" th:src="@{/img/librarian.png}">	
 						</div>
-							<form id="login-form" class="form" th:action="@{/admin/home}" method="post">
+						
+						
+							<form id="login-form" class="form" th:action="@{/login}" method="post">
 								<div class="form-row">
 									<div class="col form-group">
 										<label>User Id</label> 
@@ -58,14 +58,13 @@
 								<div class="form-group">
 									<button 
 									       type="submit" 
-									       th:href="@{/librarian/home}"
+									       
 									       class="btn btn-success btn-block">
-										Login As Admin</button>
+										Login</button>
 								</div>
 							</form>
 						</article>
 						<!-- card-body end .// -->
-						
 						
 						<div class="container text-center mb-3">
 						   <a th:href="@{/forgot-password}">forgot password</a>
