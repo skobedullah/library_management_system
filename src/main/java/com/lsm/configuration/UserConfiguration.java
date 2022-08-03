@@ -46,6 +46,7 @@ public class UserConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
 		auth.inMemoryAuthentication()
 			.withUser("librarian").password("{noop}password").roles("USER")
 			.and()
