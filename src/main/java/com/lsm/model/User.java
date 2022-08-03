@@ -1,5 +1,8 @@
 package com.lsm.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -7,9 +10,10 @@ public class User {
 
 	private int id;
 
+	@NotBlank(message = "name is required")
+	@Size(min = 3,max = 20,message = "min 3 and max 50 characters are aloowed")
 	private String name;
 
-	//obedullah@gmail.com
 	private String email;
 
 	private String password;
@@ -20,15 +24,19 @@ public class User {
 
 	private String imageUrl;
 
-	public User(int i, String name, String email, String password, boolean enabled, String role, String imageUrl) {
+	private String about;
+
+	public User(int id, String name, String email, String password, boolean enabled, String role, String imageUrl,
+			String about) {
 		super();
-		this.id = i;
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.enabled = enabled;
 		this.role = role;
 		this.imageUrl = imageUrl;
+		this.about = about;
 	}
 
 	public User() {
@@ -91,10 +99,18 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", enabled="
-				+ enabled + ", role=" + role + ", imageUrl=" + imageUrl + "]";
+				+ enabled + ", role=" + role + ", imageUrl=" + imageUrl + ", about=" + about + "]";
 	}
 
 }

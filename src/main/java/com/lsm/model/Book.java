@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Book {
 
-	private Long id;
+	private int id;
 
 
 	private String name;
@@ -20,7 +20,7 @@ public class Book {
 		super();
 	}
 
-	public Book(Long id, String name, String title, String authors, String description) {
+	public Book(int id, String name, String title, String authors, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,11 +29,11 @@ public class Book {
 		this.description = description;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

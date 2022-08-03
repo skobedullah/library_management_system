@@ -3,18 +3,17 @@ package com.lsm.repository;
 import java.util.List;
 
 import com.lsm.model.Book;
-import com.lsm.model.User;
 
 public interface BookRepository {
 
-public User addBook(Book book);
+public Book addBook(Book book);
 	
-    public List<User> getAll();
+    public List<Book> getAll();
 	
-	public User getById(int id);
+	public Book getById(int id);
 	
-	public int deleteById(int id);
+	public boolean deleteById(int id);
 	
-	public int update(User e, int id);
+	public boolean update(Book e, int id);
 
 }

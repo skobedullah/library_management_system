@@ -19,7 +19,7 @@
 				<div class="card">
 					<header class="card-header  bg-primary">
 
-						<h4 class="text-center card-title mt-2 text-white">ADD LIBRARIAN</h4>
+						<h4 class="text-center card-title mt-2 text-white">UPDATE LIBRARIAN</h4>
 					</header>
 					<article class="card-body">
 
@@ -28,15 +28,11 @@
 
 						<!-- Adding alert message-->
 						<div class="container text-center">
-						
-						
-							<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert"
-								role="alert">
-								<p th:text="${session.message.content}"></p>
-								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
-							</div>
+
+
+
 						</div>
-						
+
 
 						<!-- adding regitration page logo image -->
 
@@ -44,16 +40,32 @@
 							<img style="width: 160px" alt="" th:src="@{/img/librarian.png}">
 						</div>
 
-						<form action="" th:action="@{/admin/processform}" method="POST" th:object="${user}">
+						<form action="" th:action="@{/admin/process_updateform}" method="POST" th:object="${librarian}">
+
+
+
+
+
+
+
+							<input type="hidden" name="id" class="form-control" id="name_field"
+								placeholder="Enter Your Name" required="required" th:value="${librarian.id}">
+
+
+
+
+
+
+
+
 
 
 							<!--User name field  -->
 
 							<div class="form-group">
 								<label for="">Librarian name </label>
-								<input type="text" name="name" class="form-control"
-									th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}" id="name_field"
-									placeholder="Enter Your Name" required="required" th:value="${user.name}">
+								<input type="text" name="name" class="form-control" id="name_field"
+									placeholder="Enter Your Name" required="required" th:value="${librarian.name}">
 
 								<div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
 
@@ -68,22 +80,16 @@
 							<div class="form-group">
 								<label for="">Email </label>
 								<input type="email" class="form-control" id="email_field" placeholder="Enter Email"
-									name="email" th:value="${user.email}" required="required">
+									name="email" th:value="${librarian.email}" required="required">
 							</div>
 
-							<!--User password field  -->
 
-							<div class="form-group">
-								<label for="">Password </label>
-								<input type="password" class="form-control" id="password_field"
-									placeholder="Enter password" name="password" required="required">
-							</div>
 
 							<!-- user about field  -->
 
 							<div class="form-field">
 								<textarea name="about" id="about_field" rows="10" class="form-control"
-									placeholder="Enter about Librarian" th:text="${user.about}"></textarea>
+									placeholder="Enter about Librarian" th:text="${librarian.about}"></textarea>
 							</div>
 
 
@@ -93,8 +99,8 @@
 
 							<div class="container text-center">
 
-								<button type="reset" class="btn btn-warning btn-block text-white">Reset</button>
-								<button type="submit" class="btn bg-primary btn-block text-white">Submit</button>
+
+								<button type="submit" class="btn bg-primary btn-block text-white">UPDATE</button>
 							</div>
 							<!-- form-group// -->
 						</form>
