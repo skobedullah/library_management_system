@@ -14,24 +14,24 @@ import com.lsm.model.Book;
 import com.lsm.model.User;
 import com.lsm.repository.UserRepository;
 
-@Service
+
 public class DummyUserService implements UserRepository {
 
-	public List<User> users = new ArrayList<User>(Arrays.asList(
-		new User(1, "user1", "user1@mail", "user1password", true, "librarian", "user1 image", "user1 about"),
-		new User(2, "user2", "user2@mail", "user2password", true, "librarian", "user2 image", "user2 about"),
-		new User(3, "user3", "user3@mail", "user3password", true, "librarian", "user3 image", "user3 about"),
-		new User(4, "user4", "user4@mail", "user4password", true, "librarian", "user4 image", "user4 about"),
-		new User(5, "user5", "user5@mail", "user5password", true, "librarian", "user5 image", "user5 about")
-	));
+	public List<User> users = new ArrayList<User>(
+			Arrays.asList(
+							new User(1, "user1", "user1@mail", "user1password", "librarian", "user1 about"),
+							new User(2, "user2", "user2@mail", "user2password", "librarian", "user2 about"),
+							new User(3, "user3", "user3@mail", "user3password", "librarian", "user3 about"),
+							new User(4, "user4", "user4@mail", "user4password", "librarian", "user4 about"),
+							new User(5, "user5", "user5@mail", "user5password", "librarian", "user5 about"))
+						);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public User addUser(User u1) {
-		
-		
+
 		if (users.add(u1))
 			return u1;
 		return null;
@@ -69,17 +69,14 @@ public class DummyUserService implements UserRepository {
 	@Override
 	public boolean update(User e, int id) {
 		System.out.println(e);
-		System.out.println("user------------------------------------------------------- id"+id);
+		System.out.println("user------------------------------------------------------- id" + id);
 		User b = getById(id);
-
 
 		if (b != null) {
 			b.setId(e.getId());
 			b.setName(e.getName());
 			b.setEmail(e.getEmail());
 			b.setAbout(e.getAbout());
-			b.setEnabled(e.isEnabled());
-			b.setImageUrl(e.getImageUrl());
 			b.setPassword(e.getPassword());
 			b.setRole(e.getRole());
 

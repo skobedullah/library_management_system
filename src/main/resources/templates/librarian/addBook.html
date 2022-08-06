@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin/base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="librarian/base::layout(~{::section})">
 
 <head>
 	<meta charset="UTF-8" />
@@ -19,7 +19,7 @@
 				<div class="card">
 					<header class="card-header  bg-primary">
 
-						<h4 class="text-center card-title mt-2 text-white">ADD LIBRARIAN</h4>
+						<h4 class="text-center card-title mt-2 text-white">Add Book</h4>
 					</header>
 					<article class="card-body">
 
@@ -38,28 +38,26 @@
 						</div>
 
 
-						<!-- adding regitration page logo image -->
 
-						<div class="container text-center mb-5">
-							<img style="width: 160px" alt="" th:src="@{/img/librarian.png}">
+						<div class="container text-center">
+							<img style="width: 160px" alt="" th:src="@{/img/books.png}">
 						</div>
 
-						<form action="" th:action="@{/admin/processform}" method="POST" th:object="${user}">
+						<form action="" th:action="@{/librarian/processform}" method="POST" th:object="${book}">
 
 
 
 
 							<div class="form-group row">
-								<label for="Librarian_Name" class="col-sm-2 col-form-label">Librarian name</label>
+								<label for="Book_name" class="col-sm-2 col-form-label">Book Name</label>
 								<div class="col-sm-10">
 									<input type="text" name="name" class="form-control"
 										th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
-										id="name_field" placeholder="Enter Your Name" required="required"
-										th:value="${user.name}">
+										id="name_field" placeholder="Enter Book Name" required="required"
+										th:value="${book.name}">
 
 									<div class="invalid-feedback" th:each="e : ${#fields.errors('name')}"
 										th:text="${e}">
-
 									</div>
 								</div>
 							</div>
@@ -67,54 +65,58 @@
 
 
 
+
 							<div class="form-group row">
-								<label for="Email" class="col-sm-2 col-form-label">Email</label>
+								<label for="Title" class="col-sm-2 col-form-label">Title</label>
 								<div class="col-sm-10">
-									<input type="email" class="form-control"
-									
-										th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
-										
-										required="required"
-										id="email_field" placeholder="Enter Email" name="email"
-										th:value="${user.email}">
+									<input type="text" class="form-control" id="title_field"
+										th:classappend="${#fields.hasErrors('title') ? 'is-invalid' : ''}"
+										placeholder="Enter Book Title" name="title" th:value="${book.title}"
+										required="required">
 
-									<div class="invalid-feedback" th:each="error : ${#fields.errors('email')}"
-										th:text="${error}">
+									<div class="invalid-feedback" th:each="e : ${#fields.errors('title')}"
+										th:text="${e}">
+									</div>
+								</div>
+							</div>
 
+
+
+
+
+							<div class="form-group row">
+								<label for="Author" class="col-sm-2 col-form-label">Authur</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="author_field"
+										th:classappend="${#fields.hasErrors('author') ? 'is-invalid' : ''}"
+										placeholder="Enter Author name" name="author" required="required">
+
+
+									<div class="invalid-feedback" th:each="e : ${#fields.errors('author')}"
+										th:text="${e}">
 									</div>
 
 								</div>
 							</div>
 
 
-							<div class="form-group row">
-								<label for="Email" class="col-sm-2 col-form-label">Password</label>
-								<div class="col-sm-10">
-									<input type="password" class="form-control" id="password_field"
-										placeholder="Enter password" name="password" required="required"
-										th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}">
-										
-										
-										<div class="invalid-feedback" th:each="error : ${#fields.errors('password')}"
-										th:text="${error}">
 
-									</div>
+
+
+							<div class="form-group row">
+								<label for="Description" class="col-sm-2 col-form-label">Description</label>
+								<div class="col-sm-10">
+									<textarea name="description" id="description_field" rows="10" class="form-control"
+										placeholder="Enter book description" th:text="${book.description}"></textarea>
 								</div>
 							</div>
 
 
-							<div class="form-group row">
-								<label for="Email" class="col-sm-2 col-form-label">About</label>
-								<div class="col-sm-10">
-									<textarea name="about" id="about_field" rows="10" class="form-control"
-										placeholder="Enter about Librarian" th:text="${user.about}"></textarea>
-								</div>
-							</div>
+
 
 
 							<br>
 
-							<!-- Adding reset and submit button for form -->
 
 							<div class="container text-center">
 
@@ -149,7 +151,7 @@
 		<script>
 			$(document).ready(() => {
 				$(".item").removeClass("active");
-				$("#add-librarian").addClass("active");
+				$("#add-book").addClass("active");
 			});
 		</script>
 	</section>

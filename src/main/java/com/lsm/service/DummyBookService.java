@@ -5,9 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.lsm.model.Book;
 import com.lsm.repository.BookRepository;
 
+
+@Service
 public class DummyBookService implements BookRepository{
 	
 	public List<Book> books =new ArrayList<>(Arrays.asList(
@@ -48,15 +52,17 @@ public class DummyBookService implements BookRepository{
 	@Override
 	public boolean update(Book e, int id) {
 		Book b=getById(id);
+		System.out.println(e);
 		
 		if(b!=null) {
 			b.setId(e.getId());
 			b.setName(e.getName());
-			b.setAuthors(e.getAuthors());
+			b.setAuthor(e.getAuthor());
 			b.setDescription(e.getDescription());
 			b.setTitle(e.getTitle());
 			
 			books.set(books.indexOf(b), b);
+			System.out.println(b);
 			return true;
 		}
 		return false;
@@ -103,7 +109,7 @@ public class DummyBookService implements BookRepository{
 
 
 
-/*
+/*@Query("")
  * @Autowired JdbcTemplate jdbcTemplate;
  * 
  * @Override public List<Employee> findAll() { return

@@ -1,5 +1,8 @@
 package com.lsm.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -7,12 +10,17 @@ public class Book {
 
 	private int id;
 
-
+	@NotBlank(message = "name is required")
+	@Size(min = 3,max = 30,message = "name size must be between 3 to 30 character")
 	private String name;
 
+	@NotBlank(message = "name is required")
+	@Size(min = 5,max = 50,message = "title length should be min-5 char and max-50")
 	private String title;
 
-	private String authors;
+	@NotBlank(message = "name is required")
+	@Size(min = 3,max = 20,message = "author name should be of length 3")
+	private String author;
 
 	private String description;
 
@@ -20,12 +28,12 @@ public class Book {
 		super();
 	}
 
-	public Book(int id, String name, String title, String authors, String description) {
+	public Book(int id, String name, String title, String author, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.title = title;
-		this.authors = authors;
+		this.author = author;
 		this.description = description;
 	}
 
@@ -53,12 +61,12 @@ public class Book {
 		this.title = title;
 	}
 
-	public String getAuthors() {
-		return authors;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setAuthors(String authors) {
-		this.authors = authors;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getDescription() {
@@ -71,7 +79,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", name=" + name + ", title=" + title + ", authors=" + authors + ", description="
+		return "Book [id=" + id + ", name=" + name + ", title=" + title + ", authors=" + author + ", description="
 				+ description + "]";
 	}
 

@@ -1,6 +1,9 @@
 package com.lsm.model;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
@@ -11,31 +14,29 @@ public class User {
 	private int id;
 
 	@NotBlank(message = "name is required")
-	@Size(min = 3,max = 20,message = "min 3 and max 50 characters are aloowed")
+	@Size(min = 3, max = 30, message = "min 3 and max 30 characters are allowed")
 	private String name;
 
+	@Email(message="Please provide a valid email address and must contain @ .")
+	@Pattern(regexp=".+@.+\\..+", message="email must contain @ .")
 	private String email;
 
+	
+	@Size(min = 4, max = 20, message = "password length must be 4 character long")
+	@NotNull(message = "password is required")
 	private String password;
-
-	private boolean enabled;
 
 	private String role;
 
-	private String imageUrl;
-
 	private String about;
 
-	public User(int id, String name, String email, String password, boolean enabled, String role, String imageUrl,
-			String about) {
+	public User(int id, String name, String email, String password, String role, String about) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.enabled = enabled;
 		this.role = role;
-		this.imageUrl = imageUrl;
 		this.about = about;
 	}
 
@@ -75,28 +76,12 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	public String getRole() {
 		return role;
 	}
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
 	}
 
 	public String getAbout() {
@@ -109,8 +94,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", enabled="
-				+ enabled + ", role=" + role + ", imageUrl=" + imageUrl + ", about=" + about + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", about=" + about + "]";
 	}
 
 }
