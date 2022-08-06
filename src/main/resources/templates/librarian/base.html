@@ -1,4 +1,3 @@
-/555
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
 
@@ -44,21 +43,17 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 			<ul class="navbar-nav ml-auto text-uppercase">
-				<li class="nav-item active"><a th:href="@{/admin/admin_dashboard}" class="nav-link" href="#">
+				<li class="nav-item active"><a th:href="@{/librarian/librarian_dashboard}" class="nav-link" href="#">
 						<img style="width: 20px" alt="" th:src="@{/img/home.png}">
-						Home
+						DashBoard
 						<span class="sr-only">(current)</span>
 					</a></li>
 
-				<li class="nav-item active">
-					<a th:href="@{/admin/profile}" class="nav-link " tabindex="-1" aria-disabled="true">
-						<img style="width: 20px" alt="" th:src="@{/img/user.png}"> 
-						
-						<span th:text="${cUser.name}"></span>
-
-					</a>
-
-				</li>
+				<li class="nav-item active"><a th:href="@{/librarian/profile}" class="nav-link " tabindex="-1"
+						aria-disabled="true">
+						<img style="width: 20px" alt="" th:src="@{/img/user.png}">
+					
+						<span th:text="${cUser.name}"></span></a></li>
 
 
 				<li class="nav-item active"><a th:href="@{/logout}" class="nav-link " href="#" tabindex="-1"
@@ -66,11 +61,7 @@
 						<img style="width: 20px" alt="" th:src="@{/img/logouticon.png}">
 						Logout</a></li>
 			</ul>
-			<!-- <form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form> -->
+
 		</div>
 	</nav>
 
@@ -80,15 +71,13 @@
 
 
 
-		<a id="home" th:href="@{/admin/admin_dashboard}" class="item">
+		<a id="home" th:href="@{/librarian/librarian_dashboard}" class="item">
 			<i class="fas fa-home" style="color: blue;"></i> Home</a>
-		<a id="add-librarian" th:href="@{/admin/add_librarian}" class="item"><i class="fas fa-plus-square"
-				style="color: blue;"></i> Add Librarian</a>
-		<a id="librarians" th:href="@{/admin/view_librarians}" class="item"><i class="far fa-address-book"
-				style="color: blue;"></i> View Librarians</a>
+		<a id="add-book" th:href="@{/librarian/add_book}" class="item"><i class="fas fa-plus-square"
+				style="color: blue;"></i> Add Book</a>
+		<a id="books" th:href="@{/librarian/view_books}" class="item"><i class="far fa-address-book"
+				style="color: blue;"></i> View Books</a>
 
-		<!--   <a id="profile" th:href="@{/user/profile}" class="item"><i class="fas fa-user" style="color: blue;"></i> Your profile</a>
-       <a id="settings" th:href="@{/user/settings}" class="item"><i class="item fas fa-users-cog" style="color: blue;"></i> Settings</a> -->
 		<a th:href="@{/logout}" class="item"><i class="fas fa-sign-out-alt" style="color: blue;"></i> Logout</a>
 		<div class="divider">
 		</div>
@@ -123,17 +112,17 @@
 
 	<script>
 
-		function deleteLibrarian(id) {
+		function deleteBook(id) {
 			swal({
 				title: "Are you sure?",
-				text: "you want to delete this Librarian!",
+				text: "you want to delete this Book!",
 				icon: "warning",
 				buttons: true,
 				dangerMode: true,
 			})
 				.then((willDelete) => {
 					if (willDelete) {
-						window.location = "/admin/delete_librarian/" + id;
+						window.location = "/librarian/delete_book/" + id;
 						swal("Librarian has been deleted!", {
 							icon: "success",
 

@@ -10,11 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class UserConfiguration extends WebSecurityConfigurerAdapter{
-	
+public class UserConfiguration extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	CustomSuccessHandler customSuccessHandler;
 
@@ -23,51 +25,39 @@ public class UserConfiguration extends WebSecurityConfigurerAdapter{
 		return new UserDetailServiceImpl();
 	}
 
-	/*
-	 * @Bean public BCryptPasswordEncoder passwordEncoder() { return new
-	 * BCryptPasswordEncoder(); }
-	 */
-	
-	/*
-	 * @Bean DaoAuthenticationProvider authenticationProvider() {
-	 * DaoAuthenticationProvider authenticationProvider= new
-	 * DaoAuthenticationProvider();
-	 * authenticationProvider.setUserDetailsService(getUserDetailService());
-	 * authenticationProvider.setPasswordEncoder(passwordEncoder()); return
-	 * authenticationProvider; }
-	 */
-	
-	/*
-	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
-	 * Exception { auth.authenticationProvider(authenticationProvider()); }
-	 */
-	
-	
-	
-	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.inMemoryAuthentication()
-			.withUser("librarian").password("{noop}password").roles("USER")
-			.and()
-			.withUser("admin").password("{noop}password").roles("ADMIN");
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
 	}
-	
+
+	@Bean
+	DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(getUserDetailService());
+		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		return authenticationProvider;
+	}
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authenticationProvider());
+	}
+
+	/*
+	 * @Override public void configure(AuthenticationManagerBuilder auth) throws
+	 * Exception {
+	 * 
+	 * auth.inMemoryAuthentication().withUser("librarian").password("{noop}password"
+	 * ).roles("USER").and()
+	 * .withUser("admin").password("{noop}password").roles("ADMIN"); }
+	 */
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
-		http.authorizeRequests()
-		    .antMatchers("/admin/**").hasRole("ADMIN")
-		    .antMatchers("/user/**").hasRole("USER")
-		    .antMatchers("/**").permitAll()
-		    .and()
-		    .formLogin()
-		    .loginPage("/login")
-		    .loginProcessingUrl("/login")
-		    .successHandler(customSuccessHandler)
-		    .and()
-		    .csrf().disable();
+
+		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/user/**").hasRole("USER")
+				.antMatchers("/**").permitAll().and().formLogin().loginPage("/login").loginProcessingUrl("/login")
+				.successHandler(customSuccessHandler).and().csrf().disable();
 	}
-	
+
 }

@@ -20,17 +20,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.lsm.helper.Message;
 import com.lsm.model.User;
 import com.lsm.service.DummyUserService;
+import com.lsm.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
-	DummyUserService dummyUserService;
+	UserService userService;
+
+	@ModelAttribute
+	public void addCommonData(Model model, Principal principal) {
+
+		String userName = principal.getName();
+		System.out.println("common data aaded ---" + userName);
+		User user = userService.getUserByuserName(userName);
+		System.out.println("user added to the model as a common data--" + user);
+		model.addAttribute("cUser", user);
+	}
 
 	@RequestMapping("/admin_dashboard")
-	public String adminHome(Model model, Principal principal) {
+	public String adminHome(Model model, Principal principal, HttpSession session) {
 		model.addAttribute("title", "Admin DashBoard");
+
 		return "/admin/adminDashboard";
 	}
 
@@ -46,14 +58,17 @@ public class AdminController {
 	public String registerLibrarian(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model,
 			HttpSession session) {
 
-		// System.out.println("process form inviked");
+		// System.out.println("process form invoked");
 		try {
 			if (bindingResult.hasErrors()) {
 				model.addAttribute("user", user);
 				// System.out.println("has some error--in try if");
 				return "admin/addLibrarian";
 			}
-			User result = dummyUserService.addUser(user);
+			user.setRole("ROLE_USER");
+			System.out.println();
+
+			User result = userService.addUser(user);
 			model.addAttribute("user", new User());
 			session.setAttribute("message", new Message("Librarian Successfully Registered", "alert-success"));
 			return "admin/addLibrarian";
@@ -65,14 +80,15 @@ public class AdminController {
 		}
 
 	}
-	
+
 	@PostMapping("/process_updateform")
 	public String processUpdateLibrarianForm(@ModelAttribute("librarian") User user) {
-		
-		System.out.println("controller -----id  "+user.getId());
-		
-		dummyUserService.update(user, user.getId());
-		
+
+		System.out.println("controller -----id  " + user.getId());
+
+		userService.update(user, user.getId());
+		System.out.println(user);
+
 		return "redirect:/admin/view_librarians";
 	}
 
@@ -80,7 +96,7 @@ public class AdminController {
 	public String showLibrarians(Model model) {
 		model.addAttribute("title", "view Librarians");
 
-		List<User> users = dummyUserService.getAll();
+		List<User> users = userService.getAll();
 		model.addAttribute("users", users);
 
 		return "admin/viewLibrarians";
@@ -91,7 +107,7 @@ public class AdminController {
 
 		System.out.println("viw Librarian executed");
 		model.addAttribute("userId", id);
-		User user = dummyUserService.getById(id);
+		User user = userService.getById(id);
 		model.addAttribute("user", user);
 
 		return "admin/viewLibrarian";
@@ -100,7 +116,7 @@ public class AdminController {
 	@GetMapping("/delete_librarian/{id}")
 	public String deleteLibrarian(@PathVariable("id") int id, Model model, HttpSession session) {
 
-		if(dummyUserService.deleteById(id)) {
+		if (userService.deleteById(id)) {
 			model.addAttribute("message", new Message("librarian deleted successfully", "success"));
 			return "redirect:/admin/view_librarians";
 		}
@@ -108,13 +124,25 @@ public class AdminController {
 		model.addAttribute("message", new Message("someting went wrong!!", "danger"));
 		return "redirect:/admin/view_librarians";
 	}
-	
+
 	@PostMapping("/update_librarian/{id}")
-	public String updateLibrarian(@PathVariable("id") int id, Model model,HttpSession session) {
-		
-		User retriveUser = dummyUserService.getById(id);
+	public String updateLibrarian(@PathVariable("id") int id, Model model, HttpSession session) {
+
+		User retriveUser = userService.getById(id);
 		model.addAttribute("librarian", retriveUser);
 		return "/admin/updateLibrarian";
+	}
+
+	@RequestMapping("/profile")
+	public String viewProfile(Model model, Principal principal, HttpSession httpSession) {
+		String userName = principal.getName();
+
+		User user = userService.getUserByuserName(userName);
+
+		model.addAttribute("user", user);
+		model.addAttribute("title", "Admin Profile");
+		System.out.println(user);
+		return "/admin/viewProfile";
 	}
 
 }

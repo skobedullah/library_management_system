@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="admin/base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="librarian/base::layout(~{::section})">
 
 <head>
 	<meta charset="UTF-8" />
@@ -21,7 +21,7 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th scope="col">USER_ID</th>
+								<th scope="col">Librarian_ID</th>
 								<th scope="col" th:text="${user.id}"></th>
 
 							</tr>
@@ -38,7 +38,7 @@
 
 							</tr>
 
-							
+
 
 							<tr>
 								<th scope="row">ABOUT</th>
@@ -51,23 +51,13 @@
 
 					</table>
 
-					<form th:method="post" th:action="@{'/admin/update_librarian/'+${user.id}}">
-						<button class="btn btn-success btn-s  mb-2">Update</button>
-					</form>
-
-					<a th:onclick="|deleteLibrarian(${user.id})|" class="btn btn-warning btn-s">DELETE</a>
-
+					
 
 				</div>
 			</div>
 		</div>
 
-		<script>
-			$(document).ready(() => {
-				$(".item").removeClass("active");
-				$("#profile").addClass("active");
-			});
-		</script>
+	
 
 	</section>
 
