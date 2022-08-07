@@ -3,7 +3,7 @@ body {
 }
 
 .bg-primary {
-	background: rgb(0, 142, 142) !important;
+	background: rgb(68, 172, 187) !important;
 }
 
 .banner {
@@ -59,7 +59,7 @@ body {
 }
 
 .sidebar a:hover {
-	background:#009688;
+	background:rgb(158, 154, 216);
 	font-size: 18px;
 	font-weight:bold;
 	color: rgb(255, 255, 255);
@@ -80,22 +80,8 @@ body {
 	margin-left: 20%;
 }
 
-/* -------Cross btn and side bar open btn  ---- */
-.sidebar .crossBtn {
-	position: absolute;
-	font-size: 30px;
-	color: blue;
-	top: 25px;
-	right: 35px;
-	cursor: pointer;
-	transition:0.4s;
-}
 
-.sidebar .crossBtn:hover{
-	font-size:40px;
-	color: green;
-	transition:0.4s;
-}
+
 
 /* The button used to open the sidebar */
 .content .openbtn {
@@ -114,32 +100,26 @@ body {
 	transition:0.4s;
 }
 
-/* ending of open and close btn of sidebar */
 
 
-/* search result in view contact */
 
-.search-container{
- position: relative;	
-	
-}
-
-.search-result{
-	position: absolute;
-	width: 100%;
-	border: 1px solid gray ;
-	padding: 10px;
-	background: white;
-    display: none;
-}
 /* sidebar link activation*/
 
 .active{
-	background: #009688 !important;
+	background:rgb(158, 154, 216) !important;
 	color: white !important;
 }
 
 
+.nactive{
+	background:rgb(68, 172, 187) !important;
+	color: rgb(128, 255, 128) !important;
+}
+
+
+.bg-xyz{
+		background: rgb(158, 154, 216)!important;
+}
 
 
 
