@@ -34,7 +34,7 @@
 
 	<!-- ********  nav bar  *********** -->
 
-	<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-primary height:30px">
+	<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-xyz height:30px">
 		<a class="navbar-brand" href="#">Library Management System</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,13 +44,13 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 			<ul class="navbar-nav ml-auto text-uppercase">
-				<li class="nav-item active"><a th:href="@{/admin/admin_dashboard}" class="nav-link" href="#">
+				<li class="nav-item nactive"><a th:href="@{/admin/admin_dashboard}" class="nav-link" href="#">
 						<img style="width: 20px" alt="" th:src="@{/img/home.png}">
 						Home
 						<span class="sr-only">(current)</span>
 					</a></li>
 
-				<li class="nav-item active">
+				<li class="nav-item nactive">
 					<a th:href="@{/admin/profile}" class="nav-link " tabindex="-1" aria-disabled="true">
 						<img style="width: 20px" alt="" th:src="@{/img/user.png}"> 
 						
@@ -61,7 +61,7 @@
 				</li>
 
 
-				<li class="nav-item active"><a th:href="@{/logout}" class="nav-link " href="#" tabindex="-1"
+				<li class="nav-item nactive"><a th:href="@{/logout}" class="nav-link " href="#" tabindex="-1"
 						aria-disabled="true">
 						<img style="width: 20px" alt="" th:src="@{/img/logouticon.png}">
 						Logout</a></li>
@@ -81,15 +81,15 @@
 
 
 		<a id="home" th:href="@{/admin/admin_dashboard}" class="item">
-			<i class="fas fa-home" style="color: blue;"></i> Home</a>
+			<i class="fas fa-home" style="color: rgb(0, 64, 0);"></i> Home</a>
 		<a id="add-librarian" th:href="@{/admin/add_librarian}" class="item"><i class="fas fa-plus-square"
-				style="color: blue;"></i> Add Librarian</a>
+				style="color: rgb(0, 64, 64);"></i> Add Librarian</a>
 		<a id="librarians" th:href="@{/admin/view_librarians}" class="item"><i class="far fa-address-book"
-				style="color: blue;"></i> View Librarians</a>
+				style="color: rgb(0, 64, 0);"></i> View Librarians</a>
 
 		<!--   <a id="profile" th:href="@{/user/profile}" class="item"><i class="fas fa-user" style="color: blue;"></i> Your profile</a>
        <a id="settings" th:href="@{/user/settings}" class="item"><i class="item fas fa-users-cog" style="color: blue;"></i> Settings</a> -->
-		<a th:href="@{/logout}" class="item"><i class="fas fa-sign-out-alt" style="color: blue;"></i> Logout</a>
+		<a th:href="@{/logout}" class="item"><i class="fas fa-sign-out-alt" style="color: rgb(0, 64, 0);"></i> Logout</a>
 		<div class="divider">
 		</div>
 	</div>
