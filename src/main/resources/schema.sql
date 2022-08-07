@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL UNIQUE,
-  `password` varchar(45) DEFAULT NULL,
+  `password` varchar(70) DEFAULT NULL,
   `role` varchar(45) DEFAULT NULL,
   `about` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -17,10 +17,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 
-INSERT INTO `user` VALUES 
-	(1001,'ADMIN-1','admin1@login','password','ROLE_ADMIN','about admin1'),
-	(1002,'ADMIN-2','admin2@login','password','ROLE_ADMIN','about admin2');
-	
+
 
 
 CREATE TABLE IF NOT EXISTS `book` (

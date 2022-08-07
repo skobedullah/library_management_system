@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,9 +26,13 @@ import com.lsm.service.UserService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal) {
@@ -66,6 +71,7 @@ public class AdminController {
 				return "admin/addLibrarian";
 			}
 			user.setRole("ROLE_USER");
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			System.out.println();
 
 			User result = userService.addUser(user);

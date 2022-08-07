@@ -42,23 +42,23 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-			<ul class="navbar-nav ml-auto text-uppercase">
-				<li class="nav-item active"><a th:href="@{/librarian/librarian_dashboard}" class="nav-link" href="#">
-						<img style="width: 20px" alt="" th:src="@{/img/home.png}">
-						DashBoard
+			<ul class="navbar-nav ml-auto ">
+				<li class="nav-item " style="font-weight: bold;"><a th:href="@{/librarian/librarian_dashboard}" class="nav-link" href="#">
+						<img style="width: 15px;" alt="" th:src="@{/img/home.png}">
+						<span style="color: white;">DashBoard</span>
 						<span class="sr-only">(current)</span>
 					</a></li>
 
-				<li class="nav-item active"><a th:href="@{/librarian/profile}" class="nav-link " tabindex="-1"
+				<li class="nav-item "><a th:href="@{/librarian/profile}" class="nav-link " tabindex="-1"
 						aria-disabled="true">
-						<img style="width: 20px" alt="" th:src="@{/img/user.png}">
+						<img style="width: 15px; font-weight: bold;" alt="" th:src="@{/img/user.png}">
 					
-						<span th:text="${cUser.name}"></span></a></li>
+						<span style="color: white;" th:text="${cUser.name}"></span></a></li>
 
 
-				<li class="nav-item active"><a th:href="@{/logout}" class="nav-link " href="#" tabindex="-1"
+				<li class="nav-item "><a th:href="@{/logout}" class="nav-link " href="#" tabindex="-1"
 						aria-disabled="true">
-						<img style="width: 20px" alt="" th:src="@{/img/logouticon.png}">
+						<img style="width: 15px;  " alt="" th:src="@{/img/logouticon.png}">
 						Logout</a></li>
 			</ul>
 
