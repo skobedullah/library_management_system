@@ -24,10 +24,14 @@ public class UserConfiguration extends WebSecurityConfigurerAdapter {
 	public UserDetailsService getUserDetailService() {
 		return new UserDetailServiceImpl();
 	}
+	/*
+	 * @Bean public PasswordEncoder passwordEncoder() { return
+	 * NoOpPasswordEncoder.getInstance(); }
+	 */
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
+		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
