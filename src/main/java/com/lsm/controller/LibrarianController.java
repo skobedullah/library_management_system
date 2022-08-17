@@ -25,15 +25,29 @@ import com.lsm.service.UserService;
 @RequestMapping("/librarian")
 public class LibrarianController {
 
+	/**
+	 * Injecting BookService
+	 */
 	@Autowired
 	private BookService bookService;
 
+	
+	/**
+	 * Injecting UserService
+	 */
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * Adding common data 
+	 * 
+	 * @Param Model
+	 * @param Principal
+	 * @Return Model object containing current loggedIn User Object 
+	 * 
+	 **/
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal) {
-
 		String userName = principal.getName();
 		System.out.println("c --common data aaded ---" + userName);
 		User user = userService.getUserByuserName(userName);
@@ -41,16 +55,29 @@ public class LibrarianController {
 		model.addAttribute("cUser", user);
 	}
 
+	
+
+	/**
+	 * view librarianDashBoard
+	 * 
+	 * @Param Model
+	 * @Return Return librarianDashBoard as an UI
+	 * 
+	 **/
 	@RequestMapping("/librarian_dashboard")
-	public String adminDashBoard(Model model, Principal principal, HttpSession session) {
-
-		String userName = principal.getName();
-		System.out.println("current loggedin from Librarian dashboard user----" + userName);
-		User user = userService.getUserByuserName(userName);
-
-		session.setAttribute("user", user);
+	public String adminDashBoard(Model model) {
+		model.addAttribute("title", "Librarian DashBoard");
 		return "/librarian/librarianDashboard";
 	}
+
+	/**
+	 * add Book Form
+	 * 
+	 * @Param Model
+	 * @param Book
+	 * @Return Redirect addBook form as an UI
+	 * 
+	 **/
 
 	@RequestMapping("/add_book")
 	public String addBook(Book book, Model model) {
@@ -59,6 +86,18 @@ public class LibrarianController {
 		model.addAttribute("book", new Book());
 		return "/librarian/addBook";
 	}
+
+	/**
+	 * Process add Book Form
+	 * 
+	 * @Param Model
+	 * @param Session
+	 * @Param Valid
+	 * @param User
+	 * @param BindingResult
+	 * @Return Return addBook as an UI
+	 * 
+	 **/
 
 	@PostMapping("/processform")
 	public String processAddbookForm(@Valid @ModelAttribute("book") Book book, BindingResult bindingResult, Model model,
@@ -81,6 +120,14 @@ public class LibrarianController {
 		}
 	}
 
+	/**
+	 * View Books
+	 * 
+	 * @Param Model
+	 * @Return All added Books
+	 * 
+	 **/
+
 	@RequestMapping("/view_books")
 	public String viewBooks(Model model) {
 
@@ -88,6 +135,15 @@ public class LibrarianController {
 		model.addAttribute("books", books);
 		return "/librarian/viewBooks";
 	}
+
+	/**
+	 * View Book
+	 * 
+	 * @Param Model
+	 * @Param Book ID
+	 * @Return viewBook page
+	 * 
+	 **/
 
 	@RequestMapping("/view_book/{id}")
 	public String viewBook(@PathVariable("id") int id, Model model) {
@@ -98,6 +154,14 @@ public class LibrarianController {
 		return "librarian/viewBook";
 	}
 
+	/**
+	 * Book Update Form
+	 * 
+	 * @param Book  id
+	 * @param Model
+	 * @Return Return Book Update Form as an UI
+	 * 
+	 **/
 	@RequestMapping("/update_book/{id}")
 	public String updateBook(@PathVariable("id") int id, Model model) {
 		Book retriveBook = bookService.getById(id);
@@ -105,21 +169,43 @@ public class LibrarianController {
 		return "/librarian/updateBook";
 	}
 
+	/**
+	 * Process Book Update Form
+	 * 
+	 * @param Book
+	 * @Return Redirecting to the View Books page
+	 * 
+	 **/
 	@PostMapping("/process_updateform")
-	public String processUpdateBookForm(@ModelAttribute("book") Book book, Model model) {
+	public String processUpdateBookForm(@ModelAttribute("book") Book book) {
 
 		bookService.update(book, book.getId());
 		return "redirect:/librarian/view_books";
 	}
 
+	/**
+	 * Delete Book
+	 * 
+	 * @param Model
+	 * @param Book  ID
+	 * @Return Redirecting to the View Books page
+	 * 
+	 **/
 	@RequestMapping("/delete_book/{id}")
 	public String deletebook(@PathVariable("id") int id, Model model) {
-
 		boolean deleteById = bookService.deleteById(id);
-
 		return "redirect:/librarian/view_books";
-
 	}
+
+	/**
+	 * view Current LoggedIn user Profile
+	 * 
+	 * @param Model
+	 * @param Principal
+	 * @param HttpSession
+	 * @Return loggedIn User Profile
+	 * 
+	 **/
 
 	@RequestMapping("/profile")
 	public String viewProfile(Model model, Principal principal, HttpSession httpSession) {
