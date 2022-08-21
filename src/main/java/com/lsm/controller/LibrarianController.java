@@ -2,10 +2,12 @@ package com.lsm.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +15,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lsm.helper.Message;
 import com.lsm.model.Book;
 import com.lsm.model.User;
 import com.lsm.service.BookService;
 import com.lsm.service.UserService;
+
+import com.razorpay.*;
 
 @Controller
 @RequestMapping("/librarian")
@@ -37,6 +43,35 @@ public class LibrarianController {
 	 */
 	@Autowired
 	private UserService userService;
+	
+	
+	
+	
+	
+	//creating order
+	
+	@PostMapping("/create_order")
+	@ResponseBody
+	public String createOrder(@RequestBody Map<String, Object> data) throws RazorpayException {
+		System.out.println("order creation function called");
+		System.out.println(data);
+		int amount=Integer.parseInt(data.get("amount").toString());
+		
+		RazorpayClient rpc = new RazorpayClient("rzp_test_MxDm4phYN6zBXl", "R2Bz374FMEqdjXNWl7zAM3QX");
+		
+		JSONObject options = new JSONObject();
+		options.put("amount", amount*100);
+		options.put("currency", "INR");
+		options.put("receipt", "txn_123456");
+		rpc.orders.create(options);
+		System.out.println(rpc.orders.create(options).toString());
+		return rpc.orders.create(options).toString();
+	}
+	
+	
+	
+	
+	
 
 	/**
 	 * Adding common data 
