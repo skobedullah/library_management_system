@@ -21,11 +21,13 @@
 
 	<title th:text="${title}">Base page</title>
 
+	<!-- *********************************   for razer pay *********** -->
 
-	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+
 </head>
 
 <body>
@@ -43,7 +45,8 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 			<ul class="navbar-nav ml-auto ">
-				<li class="nav-item " style="font-weight: bold;"><a th:href="@{/librarian/librarian_dashboard}" class="nav-link" href="#">
+				<li class="nav-item " style="font-weight: bold;"><a th:href="@{/librarian/librarian_dashboard}"
+						class="nav-link" href="#">
 						<img style="width: 15px;" alt="" th:src="@{/img/home.png}">
 						<span style="color: white;">DashBoard</span>
 						<span class="sr-only">(current)</span>
@@ -52,7 +55,7 @@
 				<li class="nav-item "><a th:href="@{/librarian/profile}" class="nav-link " tabindex="-1"
 						aria-disabled="true">
 						<img style="width: 15px; font-weight: bold;" alt="" th:src="@{/img/user.png}">
-					
+
 						<span style="color: white;" th:text="${cUser.name}"></span></a></li>
 
 
@@ -78,7 +81,8 @@
 		<a id="books" th:href="@{/librarian/view_books}" class="item"><i class="far fa-address-book"
 				style="color: rgb(0, 64, 0);"></i> View Books</a>
 
-		<a th:href="@{/logout}" class="item"><i class="fas fa-sign-out-alt" style="color: rgb(0, 64, 0);"></i> Logout</a>
+		<a th:href="@{/logout}" class="item"><i class="fas fa-sign-out-alt" style="color: rgb(0, 64, 0);"></i>
+			Logout</a>
 		<div class="divider">
 		</div>
 	</div>
@@ -133,6 +137,8 @@
 
 	</script>
 
+
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<script th:src="@{/js/script.js}"></script>
 </body>
 

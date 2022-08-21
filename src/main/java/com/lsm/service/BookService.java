@@ -9,62 +9,40 @@ import org.springframework.stereotype.Service;
 
 import com.lsm.model.Book;
 import com.lsm.repository.BookRepository;
+import com.lsm.repository.repositoryimplementation.BookRepositoryImpl;
 
 @Service
-public class BookService implements BookRepository{
-	
-	
+public class BookService {
+
 	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
-	private static final String ADD_BOOK = "INSERT INTO book (name,title, author,description) VALUES (?,?,?,?)";
-	private static final String GET_ALL_BOOK = "SELECT * FROM book";
-	private static final String GET_BOOK_BY_ID = "SELECT * FROM book WHERE id=?";
-	private static final String DELETE_BOOK_BY_ID = "DELETE FROM book WHERE id=?";
-	private static final String UPDATE_BOOK = "UPDATE book SET name = ?, title = ?, author = ?,description=? WHERE id = ?";
+	BookRepository bookRepository;
 
-	@Override
 	public Book addBook(Book book) {
-		int update = jdbcTemplate.update(ADD_BOOK, new Object[] {  
-				book.getName(),
-				book.getTitle(),
-				book.getAuthor(),
-				book.getDescription()
-			  });
-			if(update == 1) {
-			System.out.println("book inserted ..");
-			return book;
-			}
-			return book;
+
+		Book addBook = bookRepository.addBook(book);
+
+		return addBook;
 	}
 
-	@Override
 	public List<Book> getAll() {
-		List<Book> books = jdbcTemplate.query(GET_ALL_BOOK,
-	            new BeanPropertyRowMapper<Book>(Book.class));
-           return books;
+		List<Book> books = bookRepository.getAll();
+
+		return books;
 	}
 
-	@Override
 	public Book getById(int id) {
-		Book retriveUser = jdbcTemplate.queryForObject(GET_BOOK_BY_ID, 
-                new BeanPropertyRowMapper<Book>(Book.class), id);
-                return retriveUser;
+		Book book = bookRepository.getById(id);
+		return book;
 	}
 
-	@Override
 	public boolean deleteById(int id) {
-		int update = jdbcTemplate.update(DELETE_BOOK_BY_ID, id);
-		if(update==1)return true;
-		return false;
+		boolean deleteById = bookRepository.deleteById(id);
+		return deleteById;
 	}
 
-	@Override
 	public boolean update(Book e, int id) {
-		int update = jdbcTemplate.update(UPDATE_BOOK, new Object[] {
-                e.getName(), e.getTitle(), e.getAuthor(),e.getDescription(), id});
-				if(update==1)return true;
-				return false;
+		boolean deleteById = bookRepository.update(e,id);
+		return deleteById;
 	}
 
 }
