@@ -1,31 +1,33 @@
 package com.lsm.controller;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lowagie.text.DocumentException;
 import com.lsm.helper.Message;
+import com.lsm.helper.PdfGenerator;
 import com.lsm.model.Book;
 import com.lsm.model.User;
 import com.lsm.service.BookService;
 import com.lsm.service.UserService;
-
-import com.razorpay.*;
 
 @Controller
 @RequestMapping("/librarian")
@@ -37,48 +39,18 @@ public class LibrarianController {
 	@Autowired
 	private BookService bookService;
 
-	
 	/**
 	 * Injecting UserService
 	 */
 	@Autowired
 	private UserService userService;
-	
-	
-	
-	
-	
-	//creating order
-	
-	@PostMapping("/create_order")
-	@ResponseBody
-	public String createOrder(@RequestBody Map<String, Object> data) throws RazorpayException {
-		System.out.println("order creation function called");
-		System.out.println(data);
-		int amount=Integer.parseInt(data.get("amount").toString());
-		
-		RazorpayClient rpc = new RazorpayClient("rzp_test_MxDm4phYN6zBXl", "R2Bz374FMEqdjXNWl7zAM3QX");
-		
-		JSONObject options = new JSONObject();
-		options.put("amount", amount*100);
-		options.put("currency", "INR");
-		options.put("receipt", "txn_123456");
-		rpc.orders.create(options);
-		System.out.println(rpc.orders.create(options).toString());
-		return rpc.orders.create(options).toString();
-	}
-	
-	
-	
-	
-	
 
 	/**
-	 * Adding common data 
+	 * Adding common data
 	 * 
 	 * @Param Model
 	 * @param Principal
-	 * @Return Model object containing current loggedIn User Object 
+	 * @Return Model object containing current loggedIn User Object
 	 * 
 	 **/
 	@ModelAttribute
@@ -89,8 +61,6 @@ public class LibrarianController {
 		System.out.println("c --common data aaded ---user added to the model as a common data--" + user);
 		model.addAttribute("cUser", user);
 	}
-
-	
 
 	/**
 	 * view librarianDashBoard
@@ -254,6 +224,23 @@ public class LibrarianController {
 		model.addAttribute("title", "Admin Profile");
 		System.out.println(user);
 		return "/librarian/viewProfile";
+	}
+
+	@GetMapping("/export/pdf")
+	public void exportToPDF(HttpServletResponse response,Principal principal) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename="+userService.getUserByuserName(principal.getName()).getName()+"_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
+
+		List<Book> listBooks = bookService.getAll();
+
+		PdfGenerator exporter = new PdfGenerator(listBooks);
+		exporter.export(response);
+
 	}
 
 }

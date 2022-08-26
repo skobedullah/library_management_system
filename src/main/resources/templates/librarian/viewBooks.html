@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="librarian/base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="librarian/base::layout(~{::section})">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Document</title>
+<meta charset="UTF-8" />
+<title>Document</title>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
 
 
 							<tr>
-								<th scope="col" >#ID</th>
+								<th scope="col">#ID</th>
 								<th scope="col">Name</th>
 								<th scope="col">Author</th>
 								<th scope="col">Action</th>
@@ -36,15 +37,11 @@
 
 							<tr th:each="book:${books}">
 								<th scope="row" th:text="${book.id}">1</th>
-								
-								<td>
-									<a th:href="@{'/librarian/view_book/'+${book.id}}"><span
-											th:text="${book.name}"></span></a>
-								</td>
-								<td>
-									<span th:text="${book.author}"></span>
-								</td>
-								
+
+								<td><a th:href="@{'/librarian/view_book/'+${book.id}}"><span
+										th:text="${book.name}"></span></a></td>
+								<td><span th:text="${book.author}"></span></td>
+
 								<td>
 
 									<div class="btn-group ">
@@ -52,7 +49,8 @@
 										<a th:onclick="|deleteBook(${book.id})|"
 											class="btn btn-warning btn-s mr-2">DELETE</a>
 
-										<form th:method="post" th:action="@{'/librarian/update_book/'+${book.id}}">
+										<form th:method="post"
+											th:action="@{'/librarian/update_book/'+${book.id}}">
 											<button class="btn btn-success btn-s">Update</button>
 										</form>
 									</div>
@@ -64,7 +62,12 @@
 				</div>
 
 
-
+				<div class="container text-center">
+					<a th:href="@{/librarian/export/pdf}"
+						class="btn mt-5 btn-primary btn">Download list</a>
+				</div>
+				<br>
+				<br>
 			</div>
 		</div>
 

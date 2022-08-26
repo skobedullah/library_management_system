@@ -47,12 +47,14 @@ public class UserConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	/*
-	 * @Override public void configure(AuthenticationManagerBuilder auth) throws
+	 * @Override 
+	 * public void configure(AuthenticationManagerBuilder auth) throws
 	 * Exception {
 	 * 
 	 * auth.inMemoryAuthentication().withUser("librarian").password("{noop}password"
 	 * ).roles("USER").and()
-	 * .withUser("admin").password("{noop}password").roles("ADMIN"); }
+	 * .withUser("admin").password("{noop}password").roles("ADMIN"); 
+	 * }
 	 */
 
 	@Override
