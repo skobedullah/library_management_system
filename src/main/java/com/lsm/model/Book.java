@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Book {
-
+	
 	private int id;
 
 	@NotBlank(message = "name is required")

@@ -15,15 +15,17 @@ public class User {
 
 	@NotBlank(message = "name is required")
 	@Size(min = 3, max = 30, message = "min 3 and max 30 characters are allowed")
+	@Pattern(regexp ="[a-zA-Z]+( +[a-zA-Z]+)*" ,message = "Invalid Name (special character and numbers are not allowed")
 	private String name;
 
-	@Email(message="Please provide a valid email address and must contain @ .")
-	@Pattern(regexp=".+@.+\\..+", message="email must contain @ .")
+	@Email(message="Please provide a valid email address and must contain @/.")
+	@Pattern(regexp=".+@.+\\..+", message="Invalid Email")
 	private String email;
 
 	
 	@Size(min = 4, max = 20, message = "password length must be 4 character long")
 	@NotNull(message = "password is required")
+	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,}$",message = "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:")
 	private String password;
 
 	private String role;
